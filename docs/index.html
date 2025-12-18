@@ -30,15 +30,8 @@
       to { transform: scale(1); opacity: 1; }
     }
 
-    h1 {
-      color: #ff4d6d;
-      margin-bottom: 10px;
-    }
-
-    p {
-      font-size: 18px;
-      color: #444;
-    }
+    h1 { color: #ff4d6d; }
+    p { font-size: 18px; color: #444; }
 
     button {
       padding: 12px 25px;
@@ -73,18 +66,32 @@
     }
 
     @keyframes float {
-      from {
-        transform: translateY(0);
-        opacity: 1;
-      }
-      to {
-        transform: translateY(-600px);
-        opacity: 0;
-      }
+      from { transform: translateY(0); opacity: 1; }
+      to { transform: translateY(-600px); opacity: 0; }
+    }
+
+    .music-btn {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      background: #ff4d6d;
+      color: white;
+      padding: 8px 15px;
+      border-radius: 20px;
+      cursor: pointer;
+      font-size: 14px;
     }
   </style>
 </head>
 <body>
+
+ <!-- 🎵 Background Music -->
+<audio id="bgMusic" loop>
+  <source src="music/love.mp3" type="audio/mpeg">
+</audio>
+
+
+  <div class="music-btn" onclick="toggleMusic()">🔊 Music</div>
 
   <div class="card">
     <h1>💖 True Love Alert 💖</h1>
@@ -92,7 +99,7 @@
       Roses are red 🌹<br>
       Coding is fun 💻<br>
       My life is incomplete<br>
-      Without *YOU* in it 😍
+      Without <b>YOU</b> in it 😍
     </p>
     <h2>Will you be my forever Ankudi..? 😘</h2>
 
@@ -101,6 +108,24 @@
   </div>
 
   <script>
+    const music = document.getElementById("bgMusic");
+    let isPlaying = false;
+
+    document.body.addEventListener("click", () => {
+      if (!isPlaying) {
+        music.play();
+        isPlaying = true;
+      }
+    });
+
+    function toggleMusic() {
+      if (music.paused) {
+        music.play();
+      } else {
+        music.pause();
+      }
+    }
+
     function moveNo() {
       const noBtn = document.getElementById("noBtn");
       const x = Math.random() * (window.innerWidth - 100);
@@ -115,11 +140,10 @@
           <h1>🎉 You SAID YES! 🎉</h1>
           <p>
             Congratulations! 💍<br><br>
-            This relationship is now officially:
-            <br><strong>BUG-FREE & LIFETIME VALID ❤️</strong>
-            <br><strong>You are my lifeline Forever</strong>
-            </p>
-
+            This relationship is now officially:<br>
+            <strong>BUG-FREE & LIFETIME VALID ❤️</strong><br>
+            <strong>You are my lifeline Forever</strong>
+          </p>
           <h2>True Love Activated 🔐💖</h2>
         </div>
       `;
@@ -135,9 +159,7 @@
       heart.style.bottom = "0px";
       document.body.appendChild(heart);
 
-      setTimeout(() => {
-        heart.remove();
-      }, 4000);
+      setTimeout(() => heart.remove(), 4000);
     }
   </script>
 
